@@ -1,0 +1,15 @@
+{
+  "description": "google apps script salesforce library",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:UUUM/gas-salesforce.git"
+  },
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "babel-eslint": "^7.2.3",
+    "eslint": "^4.4.1",
+    "eslint-config-airbnb-es5": "^1.2.0",
+    "eslint-plugin-react": "^7.2.1",
+    "node-google-apps-script": "^1.1.5"
+  }
+}

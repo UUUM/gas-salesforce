@@ -4,11 +4,13 @@
     PropertiesService: true,
     UrlFetchApp: true,
 
-    // Test Library
+    // External Libraries
     GasTap: true,
+    OAuth2: true,
 
     // Our classes
     Salesforce: true,
+    TestCommon: true,
 
     // test function
     testRunner: true,

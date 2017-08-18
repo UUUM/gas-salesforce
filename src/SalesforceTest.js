@@ -10,23 +10,7 @@ testRunner.functions.push(function (test) {
     setup();
 
     assert.ok(sf instanceof Salesforce, 'creates Salesforce object with a valid argument');
-    assert.ok(sf.oauth2, 'has a oauth2 property');
-  });
-
-  test('Salesforce auth', function (assert) {
-    setup();
-
-    var url = sf.oauth2.getInstanceUrl() + '/services/data';
-    UrlFetchApp.fetch(url);
-    var response = UrlFetchApp.fetch(url, {
-      contentType: 'application/json',
-      headers: {
-        Authorization: 'Bearer ' + sf.oauth2.getAccessToken(),
-        Accept: 'application/json'
-      },
-      muteHttpExceptions: true
-    });
-    Logger.log(response.getContentText());
+    assert.ok(sf.client instanceof Client, 'has a client property');
   });
 });
 

@@ -10,6 +10,7 @@
     OAuth2: true,
 
     // Our classes
+    Client: true,
     OAuth2Client: true,
     Salesforce: true,
     TestCommon: true,

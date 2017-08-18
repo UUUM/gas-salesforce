@@ -30,8 +30,20 @@ Salesforce.prototype.getAuthorizationUrl = function getAuthorizationUrl() {
   return this.service.getAuthorizationUrl();
 };
 
+Salesforce.prototype.getInstanceUrl = function getInstanceUrl() {
+  if (!this.hasAccess()) {
+    return false;
+  }
+
+  return this.getToken().instance_url;
+};
+
 Salesforce.prototype.getRedirectUri = function getRedirectUri() {
   return this.service.getRedirectUri();
+};
+
+Salesforce.prototype.getToken = function getToken() {
+  return this.service.getToken_();
 };
 
 Salesforce.prototype.hasAccess = function hasAccess() {

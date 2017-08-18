@@ -19,6 +19,7 @@ testRunner.functions.push(function (test) {
     Logger.log(sf.getRedirectUri());
     Logger.log(sf.getAuthorizationUrl());
     Logger.log(sf.hasAccess());
+    Logger.log(sf.getAccessToken());
   });
 });
 

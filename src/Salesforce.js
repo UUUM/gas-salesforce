@@ -22,6 +22,10 @@ Salesforce.prototype.createService = function createService() {
   return service;
 };
 
+Salesforce.prototype.getAccessToken = function getAccessToken() {
+  return this.service.getAccessToken();
+};
+
 Salesforce.prototype.getAuthorizationUrl = function getAuthorizationUrl() {
   return this.service.getAuthorizationUrl();
 };

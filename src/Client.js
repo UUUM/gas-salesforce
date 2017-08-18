@@ -1,4 +1,9 @@
-var Client = function Client(clientId, clientSecret) {
+var Client = function Client(version, clientId, clientSecret) {
+  if (typeof version !== 'string' || version.length < 1) {
+    throw new Error('version must be specified');
+  }
+  this.version = version;
+
   if (typeof clientId !== 'string' || clientId.length < 1) {
     throw new Error('clientId must be specified');
   }
@@ -93,8 +98,12 @@ Client.prototype.fetchPost = function fetchPost(path, params) {
   return this.fetch('post', path, null, params ? params : {});
 };
 
+Client.prototype.getApiPath = function getApiPath(path) {
+  return '/services/data/v' + this.version + '/' + path;
+};
+
 Client.prototype.getApiUrl = function getApiUrl(path, params) {
-  var url = this.oauth2.getInstanceUrl() + '/' + path;
+  var url = this.oauth2.getInstanceUrl() + this.getApiPath(path);
 
   var queryString = this.createQueryString(params);
   if (queryString) {

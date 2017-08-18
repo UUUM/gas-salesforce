@@ -1,4 +1,6 @@
 var TestCommon = function TestCommon() {
+  this.version = '40.0';
+
   var properties = PropertiesService.getScriptProperties();
 
   this.clientId = properties.getProperty('clientId');
@@ -6,9 +8,9 @@ var TestCommon = function TestCommon() {
 };
 
 TestCommon.prototype.createClient = function createClient() {
-  return new Client(this.clientId, this.clientSecret);
+  return new Client(this.version, this.clientId, this.clientSecret);
 };
 
 TestCommon.prototype.createSalesforce = function createSalesforce() {
-  return new Salesforce(this.clientId, this.clientSecret);
+  return new Salesforce(this.version, this.clientId, this.clientSecret);
 };

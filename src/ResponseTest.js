@@ -4,7 +4,7 @@ testRunner.functions.push(function (test) {
 
   function setup() {
     var client = (new TestCommon()).createClient();
-    url = client.getApiUrl('services/data');
+    url = client.getApiUrl('');
     response = new Response(UrlFetchApp.fetch(url, client.option));
   }
 

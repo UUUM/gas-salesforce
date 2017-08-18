@@ -1,3 +1,3 @@
-var Salesforce = function Salesforce(clientId, clientSecret) {
-  this.client = new Client(clientId, clientSecret);
+var Salesforce = function Salesforce(version, clientId, clientSecret) {
+  this.client = new Client(version, clientId, clientSecret);
 };

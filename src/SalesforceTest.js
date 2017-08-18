@@ -16,9 +16,9 @@ testRunner.functions.push(function (test) {
   test('Salesforce auth', function (assert) {
     setup();
 
-    Logger.log(sf.service.getRedirectUri());
+    Logger.log(sf.getRedirectUri());
     Logger.log(sf.getAuthorizationUrl());
-    Logger.log(sf.service.hasAccess());
+    Logger.log(sf.hasAccess());
   });
 });
 

@@ -26,6 +26,14 @@ Salesforce.prototype.getAuthorizationUrl = function getAuthorizationUrl() {
   return this.service.getAuthorizationUrl();
 };
 
+Salesforce.prototype.getRedirectUri = function getRedirectUri() {
+  return this.service.getRedirectUri();
+};
+
+Salesforce.prototype.hasAccess = function hasAccess() {
+  return this.service.hasAccess();
+};
+
 Salesforce.prototype.setCallback = function setCallback(callback) {
   this.service.setCallbackFunction(callback);
   return this;

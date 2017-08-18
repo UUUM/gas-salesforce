@@ -22,6 +22,10 @@ Salesforce.prototype.createService = function createService() {
   return service;
 };
 
+Salesforce.prototype.getAuthorizationUrl = function getAuthorizationUrl() {
+  return this.service.getAuthorizationUrl();
+};
+
 Salesforce.prototype.setCallback = function setCallback(callback) {
   this.service.setCallbackFunction(callback);
   return this;

@@ -50,8 +50,8 @@ testRunner.functions.push(function (test) {
   });
 
   test('Client.fetch', function (assert) {
-    var response = client.fetch('get', '/services/data');
-    Logger.log(response.getContentText());
+    var response = client.fetch('get', 'services/data');
+    Logger.log(response.getBody());
   });
 });
 

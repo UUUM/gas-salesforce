@@ -48,11 +48,11 @@ Client.prototype.fetch = function fetch(method, path) {
   var option = this.objMerge(this.option, {
     method: method
   });
-  return UrlFetchApp.fetch(url, option);
+  return new Response(UrlFetchApp.fetch(url, option));
 };
 
 Client.prototype.getApiUrl = function getApiUrl(path) {
-  return this.oauth2.getInstanceUrl() + path;
+  return this.oauth2.getInstanceUrl() + '/' + path;
 };
 
 Client.prototype.getAuthorizationHeader = function getAuthorizationHeader() {

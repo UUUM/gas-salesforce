@@ -1,56 +1,27 @@
 var Salesforce = function Salesforce(clientId, clientSecret) {
+  this.serviceName = 'salesforce';
+
+  this.authorizationBaseUrl = 'https://login.salesforce.com/services/oauth2/authorize';
+  this.tokenUrl = 'https://login.salesforce.com/services/oauth2/token';
+
+  this.callback = 'authCallback';
+
   this.clientId = clientId;
   this.clientSecret = clientSecret;
 
-  this.service = this.createService();
+  this.oauth2 = this.createOAuth2();
 };
 
-Salesforce.prototype.createService = function createService() {
-  var service = OAuth2.createService('salesforce');
+Salesforce.prototype.createOAuth2 = function createOAuth2() {
+  var oauth2 = new OAuth2Client(this.serviceName);
 
-  // Set the endpoint URLs
-  service.setAuthorizationBaseUrl('https://login.salesforce.com/services/oauth2/authorize');
-  service.setTokenUrl('https://login.salesforce.com/services/oauth2/token');
+  oauth2.setAuthorizationBaseUrl(this.authorizationBaseUrl);
+  oauth2.setTokenUrl(this.tokenUrl);
 
-  // Set the client Id and secret
-  service.setClientId(this.clientId);
-  service.setClientSecret(this.clientSecret);
+  oauth2.setClientId(this.clientId);
+  oauth2.setClientSecret(this.clientSecret);
 
-  // Set the property store where authorized tokens should be persisted.
-  service.setPropertyStore(PropertiesService.getUserProperties());
+  oauth2.setCallback(this.callback);
 
-  return service;
-};
-
-Salesforce.prototype.getAccessToken = function getAccessToken() {
-  return this.service.getAccessToken();
-};
-
-Salesforce.prototype.getAuthorizationUrl = function getAuthorizationUrl() {
-  return this.service.getAuthorizationUrl();
-};
-
-Salesforce.prototype.getInstanceUrl = function getInstanceUrl() {
-  if (!this.hasAccess()) {
-    return false;
-  }
-
-  return this.getToken().instance_url;
-};
-
-Salesforce.prototype.getRedirectUri = function getRedirectUri() {
-  return this.service.getRedirectUri();
-};
-
-Salesforce.prototype.getToken = function getToken() {
-  return this.service.getToken_();
-};
-
-Salesforce.prototype.hasAccess = function hasAccess() {
-  return this.service.hasAccess();
-};
-
-Salesforce.prototype.setCallback = function setCallback(callback) {
-  this.service.setCallbackFunction(callback);
-  return this;
+  return oauth2;
 };

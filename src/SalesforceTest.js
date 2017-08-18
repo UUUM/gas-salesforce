@@ -10,16 +10,25 @@ testRunner.functions.push(function (test) {
     setup();
 
     assert.ok(sf instanceof Salesforce, 'creates Salesforce object with a valid argument');
-    assert.ok(sf.service, 'has a service property');
+    assert.ok(sf.oauth2, 'has a oauth2 property');
   });
 
   test('Salesforce auth', function (assert) {
     setup();
 
-    Logger.log(sf.getRedirectUri());
-    Logger.log(sf.getAuthorizationUrl());
-    Logger.log(sf.hasAccess());
-    Logger.log(sf.getAccessToken());
+    /*
+    var url = sf.getInstanceUrl() + '/services/data';
+    UrlFetchApp.fetch(url);
+    var response = UrlFetchApp.fetch(url, {
+      contentType: 'application/json',
+      headers: {
+        Authorization: 'Bearer ' + sf.getAccessToken(),
+        Accept: 'application/json'
+      },
+      muteHttpExceptions: true
+    });
+    Logger.log(response.getContentText());
+    */
   });
 });
 

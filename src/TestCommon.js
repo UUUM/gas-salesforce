@@ -6,7 +6,5 @@ var TestCommon = function TestCommon() {
 };
 
 TestCommon.prototype.createSalesforce = function createSalesforce() {
-  var sf = new Salesforce(this.clientId, this.clientSecret);
-  sf.setCallback('authCallback');
-  return sf;
+  return new Salesforce(this.clientId, this.clientSecret);
 };

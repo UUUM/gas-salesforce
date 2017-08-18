@@ -16,19 +16,17 @@ testRunner.functions.push(function (test) {
   test('Salesforce auth', function (assert) {
     setup();
 
-    /*
-    var url = sf.getInstanceUrl() + '/services/data';
+    var url = sf.oauth2.getInstanceUrl() + '/services/data';
     UrlFetchApp.fetch(url);
     var response = UrlFetchApp.fetch(url, {
       contentType: 'application/json',
       headers: {
-        Authorization: 'Bearer ' + sf.getAccessToken(),
+        Authorization: 'Bearer ' + sf.oauth2.getAccessToken(),
         Accept: 'application/json'
       },
       muteHttpExceptions: true
     });
     Logger.log(response.getContentText());
-    */
   });
 });
 

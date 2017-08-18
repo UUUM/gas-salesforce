@@ -43,16 +43,65 @@ Client.prototype.createOAuth2 = function createOAuth2() {
   return oauth2;
 };
 
-Client.prototype.fetch = function fetch(method, path) {
-  var url = this.getApiUrl(path);
+Client.prototype.createQueryString = function createQueryString(params) {
+  var values = [];
+  for (var key in params) {
+    if (!params.hasOwnProperty(key)) {
+      continue;
+    }
+    var value = params[key];
+
+    if (value instanceof Array) {
+      for (var i = 0; i < value.length; i++) {
+        var k = key + '[' + i + ']';
+        var v = value[i];
+        values.push(encodeURIComponent(k) + '=' + encodeURIComponent(v));
+      }
+    } else {
+      values.push(encodeURIComponent(key) + '=' + encodeURIComponent(value));
+    }
+  }
+  return values.join('&');
+};
+
+Client.prototype.fetch = function fetch(method, path, queryParams, bodyParams) {
+  var url = this.getApiUrl(path, queryParams);
+
   var option = this.objMerge(this.option, {
     method: method
   });
+  if (bodyParams) {
+    option.payload = JSON.stringify(bodyParams);
+  }
+
   return new Response(UrlFetchApp.fetch(url, option));
 };
 
-Client.prototype.getApiUrl = function getApiUrl(path) {
-  return this.oauth2.getInstanceUrl() + '/' + path;
+Client.prototype.fetchDelete = function fetchDelete(path, params) {
+  return this.fetch('delete', path, params ? params : {});
+};
+
+Client.prototype.fetchGet = function fetchGet(path, params) {
+  return this.fetch('get', path, params ? params : {});
+};
+
+Client.prototype.fetchPatch = function fetchPatch(path, params) {
+  return this.fetch('patch', path, null, params ? params : {});
+};
+
+Client.prototype.fetchPost = function fetchPost(path, params) {
+  return this.fetch('post', path, null, params ? params : {});
+};
+
+Client.prototype.getApiUrl = function getApiUrl(path, params) {
+  var url = this.oauth2.getInstanceUrl() + '/' + path;
+
+  var queryString = this.createQueryString(params);
+  if (queryString) {
+    url += '?' + queryString;
+  }
+
+  return url;
 };
 
 Client.prototype.getAuthorizationHeader = function getAuthorizationHeader() {

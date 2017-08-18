@@ -49,8 +49,8 @@ testRunner.functions.push(function (test) {
     assert.equal(client.option.muteHttpExceptions, true, 'has a valid muteHttpExceptions value');
   });
 
-  test('Client.fetch', function (assert) {
-    var response = client.fetch('get', 'services/data');
+  test('Client.fetchGet', function (assert) {
+    var response = client.fetchGet('services/data');
     Logger.log(response.getBody());
   });
 });

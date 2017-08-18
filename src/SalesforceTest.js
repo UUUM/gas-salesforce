@@ -12,6 +12,13 @@ testRunner.functions.push(function (test) {
     assert.ok(sf instanceof Salesforce, 'creates Salesforce object with a valid argument');
     assert.ok(sf.client instanceof Client, 'has a client property');
   });
+
+  test('Salesforce.query', function (assert) {
+    setup();
+
+    var result = sf.query('SELECT Id, Name FROM Opportunity');
+    Logger.log(result);
+  });
 });
 
 /* eslint func-names: ["error", "never"] */

@@ -4,5 +4,9 @@ var Salesforce = function Salesforce(version, clientId, clientSecret) {
 
 Salesforce.prototype.query = function query(soql) {
   var response = this.client.fetchGet('query', { q: soql });
-  return response.getContentJson();
+  if (response instanceof ResponseError) {
+    return response;
+  }
+
+  return new Records(response);
 };

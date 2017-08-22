@@ -12,6 +12,7 @@
     // Our classes
     Client: true,
     OAuth2Client: true,
+    Records: true,
     Response: true,
     ResponseError: true,
     Salesforce: true,

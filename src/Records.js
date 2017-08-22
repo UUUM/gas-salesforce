@@ -1,5 +1,9 @@
 var Records = function Records(client, response) {
+  if (!(client instanceof Client)) {
+    throw new Error('client must be a Client object');
+  }
   this.client = client;
+
   this.setResponse(response);
 };
 
@@ -8,7 +12,12 @@ Records.prototype.fetchNext = function fetchNext() {
     return false;
   }
 
-  this.setResponse(this.client.fetchGet(this.nextApiPath));
+  var response = this.client.fetchGet(this.nextApiPath);
+  if (response instanceof ResponseError) {
+    throw response;
+  }
+
+  this.setResponse(response);
   return true;
 };
 
@@ -26,7 +35,7 @@ Records.prototype.forEach = function forEach(func) {
 };
 
 Records.prototype.setResponse = function setResponse(response) {
-  if (typeof response !== 'object') {
+  if (!(response instanceof Response)) {
     throw new Error('response must be a Response object');
   }
 
@@ -35,4 +44,7 @@ Records.prototype.setResponse = function setResponse(response) {
   this.content = response.getContentJson();
   this.nextApiPath = this.content.nextRecordsUrl;
   this.records = this.content.records;
+  this.total = this.content.totalSize;
+
+  return this;
 };

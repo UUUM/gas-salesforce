@@ -79,7 +79,12 @@ Client.prototype.fetch = function fetch(method, path, queryParams, bodyParams) {
     option.payload = JSON.stringify(bodyParams);
   }
 
-  return new Response(UrlFetchApp.fetch(url, option));
+  var response = new Response(UrlFetchApp.fetch(url, option));
+  var code = response.getResponseCode();
+  if (200 <= code && code < 300) {
+    return response;
+  }
+  return new ResponseError(response);
 };
 
 Client.prototype.fetchDelete = function fetchDelete(path, params) {

@@ -65,11 +65,6 @@ testRunner.functions.push(function (test) {
     assert.equal(client.option.contentType, 'application/json', 'has a valid content type');
     assert.equal(client.option.muteHttpExceptions, true, 'has a valid muteHttpExceptions value');
   });
-
-  test('Client.fetchGet', function (assert) {
-    var response = client.fetchGet('');
-    Logger.log(response.getContentJson());
-  });
 });
 
 /* eslint func-names: ["error", "never"] */

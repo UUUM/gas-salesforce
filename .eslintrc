@@ -12,6 +12,8 @@
     // Our classes
     Client: true,
     OAuth2Client: true,
+    Response: true,
+    ResponseError: true,
     Salesforce: true,
     TestCommon: true,
 

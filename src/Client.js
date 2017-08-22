@@ -99,6 +99,9 @@ Client.prototype.fetchPost = function fetchPost(path, params) {
 };
 
 Client.prototype.getApiPath = function getApiPath(path) {
+  if (path[0] === '/') {
+    return path;
+  }
   return '/services/data/v' + this.version + '/' + path;
 };
 

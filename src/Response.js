@@ -5,26 +5,26 @@ var Response = function Response(response) {
   this.response = response;
 };
 
-Response.prototype.getBody = function getBody() {
-  if (this.body) {
-    return this.body;
+Response.prototype.getContentJson = function getContentJson() {
+  if (this.json) {
+    return this.json;
   }
 
   var text = this.response.getContentText();
   if (text) {
     try {
-      this.body = JSON.parse(text);
+      this.json = JSON.parse(text);
     } catch (error) {
       if (error instanceof SyntaxError) {
-        this.body = text;
+        this.json = text;
       } else {
         throw error;
       }
     }
   } else {
-    this.body = {};
+    this.json = {};
   }
-  return this.body;
+  return this.json;
 };
 
 Response.prototype.getHeader = function getHeader(key) {

@@ -68,7 +68,7 @@ testRunner.functions.push(function (test) {
 
   test('Client.fetchGet', function (assert) {
     var response = client.fetchGet('');
-    Logger.log(response.getBody());
+    Logger.log(response.getContentJson());
   });
 });
 

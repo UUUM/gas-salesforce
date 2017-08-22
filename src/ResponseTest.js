@@ -24,11 +24,11 @@ testRunner.functions.push(function (test) {
     assert.equal(response.response, httpResponse, 'has a response property');
   });
 
-  test('Response.getBody()', function (assert) {
+  test('Response.getContentJson()', function (assert) {
     setup();
 
-    var body = response.getBody();
-    assert.equal(typeof body, 'object', 'returns an object');
+    var content = response.getContentJson();
+    assert.equal(typeof content, 'object', 'returns an object');
   });
 
   test('Response.getHeader()', function (assert) {

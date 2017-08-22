@@ -80,8 +80,7 @@ Client.prototype.fetch = function fetch(method, path, queryParams, bodyParams) {
   }
 
   var response = new Response(UrlFetchApp.fetch(url, option));
-  var code = response.getResponseCode();
-  if (200 <= code && code < 300) {
+  if (Math.floor(response.getResponseCode() / 100) === 2) {
     return response;
   }
   return new ResponseError(response);

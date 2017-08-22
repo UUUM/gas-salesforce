@@ -3,7 +3,7 @@ var Records = function Records(client, response) {
   this.setResponse(response);
 };
 
-Records.prototype.fetchNext = function fetchNext(func) {
+Records.prototype.fetchNext = function fetchNext() {
   if (!this.nextApiPath || this.content.done) {
     return false;
   }
@@ -14,8 +14,9 @@ Records.prototype.fetchNext = function fetchNext(func) {
 
 Records.prototype.forEach = function forEach(func) {
   for (;;) {
-    for (var i = 0; i < this.records.length; i++) {
-      func(records);
+    var records = this.records;
+    for (var i = 0; i < records.length; i++) {
+      func(records[i]);
     }
 
     if (!this.fetchNext()) {
@@ -32,6 +33,6 @@ Records.prototype.setResponse = function setResponse(response) {
   this.response = response;
 
   this.content = response.getContentJson();
-  this.nextApiPath = content.nextRecordsUrl;
-  this.records = content.records;
+  this.nextApiPath = this.content.nextRecordsUrl;
+  this.records = this.content.records;
 };

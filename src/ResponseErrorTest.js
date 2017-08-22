@@ -5,7 +5,7 @@ testRunner.functions.push(function (test) {
     var url = client.getApiUrl('foo');
     var option = {
       muteHttpExceptions: true
-    }
+    };
     var response = new Response(UrlFetchApp.fetch(url, option));
     var content = response.getContentJson();
 

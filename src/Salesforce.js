@@ -8,5 +8,5 @@ Salesforce.prototype.query = function query(soql) {
     return response;
   }
 
-  return new Records(response);
+  return new Records(this.client, response);
 };

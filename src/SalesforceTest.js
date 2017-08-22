@@ -16,8 +16,11 @@ testRunner.functions.push(function (test) {
   test('Salesforce.query', function (assert) {
     setup();
 
-    var result = sf.query('SELECT Id, Name FROM Opportunity');
-    Logger.log(result);
+    var records = sf.query('SELECT Id FROM Opportunity');
+    assert.ok(records instanceof Records, 'returns a Records object');
+
+    var error = sf.query('SELECT * FROM Opportunity');
+    assert.ok(error instanceof ResponseError, 'returns a ResponseError object');
   });
 });
 

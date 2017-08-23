@@ -10,6 +10,10 @@ Salesforce.prototype.doGet = function doGet(e) {
   return this.client.oauth2.doGet(e);
 };
 
+Salesforce.prototype.getAuthorizationUrl = function getAuthorizationUrl() {
+  return this.client.oauth2.service.getAuthorizationUrl();
+};
+
 Salesforce.prototype.query = function query(soql) {
   var response = this.client.fetchGet('query', { q: soql });
   if (response instanceof ResponseError) {

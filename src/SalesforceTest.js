@@ -13,6 +13,21 @@ testRunner.functions.push(function (test) {
     assert.ok(sf.client instanceof Client, 'has a client property');
   });
 
+  test('Salesforce.doGet', function (assert) {
+    setup();
+
+    var output = sf.doGet();
+    assert.equal(typeof output, 'object', 'returns HtmlOutput object');
+  });
+
+  test('Salesforce.getAuthorizationUrl', function (assert) {
+    setup();
+
+    var url = sf.getAuthorizationUrl();
+    assert.equal(typeof url, 'string', 'returns string');
+    assert.ok(url.length > 0, 'returned string is longer than 0');
+  });
+
   test('Salesforce.query', function (assert) {
     setup();
 

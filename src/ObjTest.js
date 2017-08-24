@@ -6,6 +6,17 @@ testRunner.functions.push(function (test) {
     assert.notOk(Obj.isArray({}), 'returns false if an argument is an object');
   });
 
+  test('Obj.isGASObject()', function (assert) {
+    var gasObj = PropertiesService.getScriptProperties();
+
+    assert.ok(Obj.isGASObject(gasObj), 'returns true if an argument is a GAS object');
+    assert.ok(Obj.isGASObject(gasObj, 'ScriptProperties'), 'returns true if an argument is a ScriptProperties object');
+    assert.notOk(Obj.isGASObject(1), 'returns false if an argument is an integer number');
+    assert.notOk(Obj.isGASObject(''), 'returns false if an argument is a string');
+    assert.notOk(Obj.isGASObject([]), 'returns false if an argument is an array');
+    assert.notOk(Obj.isGASObject({}), 'returns false if an argument is an object');
+  });
+
   test('Obj.isInteger()', function (assert) {
     assert.ok(Obj.isInteger(1), 'returns true if an argument is an integer number');
     assert.notOk(Obj.isInteger(1.1), 'returns false if an argument is a floating number');

@@ -87,7 +87,12 @@ QueryBuilder.prototype.orderBy = function orderBy(column, order) {
     throw new Error('Column must be a string');
   }
 
-  var orderUpperCase = order.toUpperCase();
+  var orderUpperCase;
+  if (order) {
+    orderUpperCase = order.toUpperCase();
+  } else {
+    orderUpperCase = 'ASC';
+  }
   if (orderUpperCase !== 'ASC' && orderUpperCase !== 'DESC') {
     throw new Error('Order must be "ASC" or "DESC"');
   }

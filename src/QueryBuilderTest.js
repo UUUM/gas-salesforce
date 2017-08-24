@@ -150,6 +150,45 @@ testRunner.functions.push(function testFunc(test) {
     assert.equal(qb.firstResult, 2, 'has a firstResult property');
   });
 
+  test('QueryBuilder.orderBy()', function f(assert) {
+    var qb = new QueryBuilder();
+    assert.deepEqual(qb.orders, [], 'has an empty array');
+
+    assert.throws(
+      function f2() {
+        qb.orderBy(1);
+      },
+      'throws an exception if column was a number'
+    );
+
+    assert.throws(
+      function f2() {
+        qb.orderBy([]);
+      },
+      'throws an exception if column was an array'
+    );
+
+    assert.throws(
+      function f2() {
+        qb.orderBy({});
+      },
+      'throws an exception if column was an object'
+    );
+
+    assert.throws(
+      function f2() {
+        qb.orderBy('foo', 'bar');
+      },
+      'throws an exception if order was not ASC nor DESC'
+    );
+
+    assert.equal(qb.orderBy('foo'), qb, 'returns itself');
+    assert.deepEqual(qb.orders, ['foo ASC'], 'has an orders property');
+
+    assert.equal(qb.orderBy('bar', 'DESC'), qb, 'returns itself');
+    assert.deepEqual(qb.orders, ['foo ASC', 'bar DESC'], 'has an orders property');
+  });
+
   test('QueryBuilder.params()', function f(assert) {
     var qb = new QueryBuilder();
     assert.deepEqual(qb.parameters, {}, 'has an empty object');

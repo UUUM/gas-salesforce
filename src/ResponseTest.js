@@ -28,7 +28,7 @@ testRunner.functions.push(function (test) {
     setup();
 
     var content = response.getContentJson();
-    assert.equal(typeof content, 'object', 'returns an object');
+    assert.ok(Obj.isObject(content), 'returns an object');
   });
 
   test('Response.getHeader()', function (assert) {
@@ -42,7 +42,7 @@ testRunner.functions.push(function (test) {
     setup();
 
     var headers = response.getHeaders();
-    assert.equal(typeof headers, 'object', 'returns an object');
+    assert.ok(Obj.isObject(headers), 'returns an object');
     assert.equal(headers['Content-Type'], 'application/json;charset=UTF-8', 'has a valid Content-Type');
   });
 

@@ -1,5 +1,5 @@
 var Response = function Response(response) {
-  if (typeof response !== 'object') {
+  if (!Obj.isGASObject(response)) {
     throw new Error('response must be an HTTPResponse object');
   }
   this.response = response;

@@ -15,6 +15,7 @@
     Client: true,
     OAuth2Client: true,
     Obj: true,
+    QueryBuilder: true,
     Records: true,
     Response: true,
     ResponseError: true,

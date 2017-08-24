@@ -17,14 +17,14 @@ testRunner.functions.push(function (test) {
     setup();
 
     var output = sf.doGet();
-    assert.equal(typeof output, 'object', 'returns HtmlOutput object');
+    assert.ok(Obj.isGASObject(output, 'HtmlOutput'), 'returns HtmlOutput object');
   });
 
   test('Salesforce.getAuthorizationUrl', function (assert) {
     setup();
 
     var url = sf.getAuthorizationUrl();
-    assert.equal(typeof url, 'string', 'returns string');
+    assert.ok(Obj.isString(url), 'returns string');
     assert.ok(url.length > 0, 'returned string is longer than 0');
   });
 

@@ -57,7 +57,7 @@ testRunner.functions.push(function (test) {
     var i = 0;
     records.forEach(function (record) {
       if (i === 0) {
-        assert.equal(typeof record.attributes, 'object', 'record has attributes property');
+        assert.ok(Obj.isObject(record.attributes), 'record has attributes property');
       }
 
       i++;
@@ -72,9 +72,9 @@ testRunner.functions.push(function (test) {
 
     assert.ok(records.response instanceof Response, 'has a response property');
     assert.ok(records.content instanceof Object, 'has a content property');
-    assert.equal(typeof records.nextApiPath, 'string', 'has a nextApiPath property');
-    assert.equal(typeof records.records, 'object', 'has a records property');
-    assert.equal(typeof records.total, 'number', 'has a total property');
+    assert.ok(Obj.isString(records.nextApiPath), 'has a nextApiPath property');
+    assert.ok(Obj.isArray(records.records), 'has a records property');
+    assert.ok(Obj.isInteger(records.total), 'has a total property');
   });
 });
 

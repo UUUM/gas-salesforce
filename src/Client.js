@@ -1,15 +1,15 @@
 var Client = function Client(version, clientId, clientSecret) {
-  if (typeof version !== 'string' || version.length < 1) {
+  if (!Obj.isString(version) || version.length < 1) {
     throw new Error('version must be specified');
   }
   this.version = version;
 
-  if (typeof clientId !== 'string' || clientId.length < 1) {
+  if (!Obj.isString(clientId) || clientId.length < 1) {
     throw new Error('clientId must be specified');
   }
   this.clientId = clientId;
 
-  if (typeof clientSecret !== 'string' || clientSecret.length < 1) {
+  if (!Obj.isString(clientSecret) || clientSecret.length < 1) {
     throw new Error('clientSecret must be specified');
   }
   this.clientSecret = clientSecret;

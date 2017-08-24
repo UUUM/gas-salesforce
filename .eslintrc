@@ -12,6 +12,7 @@
     // Our classes
     Client: true,
     OAuth2Client: true,
+    Obj: true,
     Records: true,
     Response: true,
     ResponseError: true,

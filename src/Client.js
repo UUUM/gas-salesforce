@@ -18,7 +18,7 @@ var Client = function Client(version, clientId, clientSecret) {
 
   this.option = {
     contentType: 'application/json',
-    headers: this.objMerge(this.getAuthorizationHeader(), {
+    headers: Obj.merge(this.getAuthorizationHeader(), {
       Accept: 'application/json'
     }),
     muteHttpExceptions: true
@@ -72,7 +72,7 @@ Client.prototype.createQueryString = function createQueryString(params) {
 Client.prototype.fetch = function fetch(method, path, queryParams, bodyParams) {
   var url = this.getApiUrl(path, queryParams);
 
-  var option = this.objMerge(this.option, {
+  var option = Obj.merge(this.option, {
     method: method
   });
   if (bodyParams) {
@@ -122,18 +122,4 @@ Client.prototype.getApiUrl = function getApiUrl(path, params) {
 
 Client.prototype.getAuthorizationHeader = function getAuthorizationHeader() {
   return { Authorization: 'Bearer ' + this.oauth2.getAccessToken() };
-};
-
-Client.prototype.objMerge = function merge() {
-  var obj = {};
-  for (var i = 0; i < arguments.length; i++) {
-    var argument = arguments[i];
-    for (var key in argument) {
-      if (!argument.hasOwnProperty(key)) {
-        continue;
-      }
-      obj[key] = argument[key];
-    }
-  }
-  return obj;
 };

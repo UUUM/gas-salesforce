@@ -112,16 +112,6 @@ testRunner.functions.push(function (test) {
       'returns a valid authorization header'
     );
   });
-
-  test('Client.objMerge()', function (assert) {
-    setup();
-
-    var a = {foo: 'foo'};
-    var b = {bar: 'bar'};
-    var c = {bar: 'baz'};
-    var expected = {foo: 'foo', bar: 'baz'};
-    assert.deepEqual(client.objMerge(a, b, c), expected, 'merges objects');
-  });
 });
 
 /* eslint func-names: ["error", "never"] */

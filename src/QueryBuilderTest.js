@@ -18,6 +18,20 @@ testRunner.functions.push(function testFunc(test) {
     assert.equal(str, "foo1 1 'bar' 'b\'\"r\''", 'returns a substituted string');
   });
 
+  test('QueryBuilder.getQuery()', function f(assert) {
+    var qb = (new QueryBuilder())
+      .fields(['Id', 'Name'])
+      .from('Opportunity')
+      .groupBy('Name')
+      .limit(1)
+      .offset(2)
+      .where('Id > :id and Name like :name')
+      .params({id: 3, name: '%a\'b%'});
+
+    var query = "SELECT Id, Name FROM Opportunity WHERE Id > 3 and Name like '%a\'b%' GROUP BY Name LIMIT 1 OFFSET 2";
+    assert.equal(qb.getQuery(), query, 'returns an exact query');
+  });
+
   test('QueryBuilder.fields()', function f(assert) {
     var qb = new QueryBuilder();
     assert.deepEqual(qb.fields, [], 'has an empty array');

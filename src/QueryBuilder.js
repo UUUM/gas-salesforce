@@ -35,11 +35,11 @@ QueryBuilder.prototype.getQuery = function getQuery() {
   }
 
   if (this.limit) {
-    query += ' LIMIT ' + this.limit;
+    query += ' LIMIT ' + this.maxResults;
   }
 
   if (this.offset) {
-    query += ' OFFSET ' + this.offset;
+    query += ' OFFSET ' + this.firstResult;
   }
 
   return this.assignParams(query, this.parameters);

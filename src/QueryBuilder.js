@@ -7,8 +7,16 @@ var QueryBuilder = function QueryBuilder() {
 
 QueryBuilder.prototype.assignParams = function assignParams(query, params) {
   return _.reduce(params, function replace(result, value, key) {
-    return result.replace(':' + key, value);
-  }, query);
+    var v;
+    if (Obj.isNumber(value)) {
+      v = value;
+    } else if (Obj.isString(value)) {
+      v = this.quoteString(value);
+    } else {
+      v = this.quoteString(value.toString());
+    }
+    return result.replace(':' + key, v);
+  }, query, this);
 };
 
 QueryBuilder.prototype.getQuery = function getQuery() {

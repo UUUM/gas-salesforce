@@ -4,6 +4,20 @@ testRunner.functions.push(function testFunc(test) {
     assert.ok(qb instanceof QueryBuilder, 'creates QueryBuilder object');
   });
 
+  test('QueryBuilder.assignParams()', function f(assert) {
+    var qb = new QueryBuilder();
+
+    var query = 'foo1 :foo2 :foo3 :foo4';
+    var params = {
+      foo1: 'bar',
+      foo2: 1,
+      foo3: 'bar',
+      foo4: 'b\'"r\''
+    };
+    var str = qb.assignParams(query, params);
+    assert.equal(str, "foo1 1 'bar' 'b\'\"r\''", 'returns a substituted string');
+  });
+
   test('QueryBuilder.fields()', function f(assert) {
     var qb = new QueryBuilder();
     assert.deepEqual(qb.fields, [], 'has an empty array');

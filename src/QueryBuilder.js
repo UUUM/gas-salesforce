@@ -110,6 +110,10 @@ QueryBuilder.prototype.params = function params(parameters) {
   return this;
 };
 
+QueryBuilder.prototype.quoteString = function quoteString(str) {
+  return "'" + str.replace("'", "\'") + "'";
+};
+
 QueryBuilder.prototype.where = function where(whereClause) {
   if (!Obj.isString(whereClause)) {
     throw new Error('Where clause must be a string');

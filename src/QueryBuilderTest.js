@@ -221,6 +221,13 @@ testRunner.functions.push(function testFunc(test) {
     assert.deepEqual(qb.parameters, {foo: 'bar', bar: 'baz'}, 'has a parameters property');
   });
 
+  test('QueryBuilder.quoteString()', function f(assert) {
+    var qb = new QueryBuilder();
+
+    assert.equal(qb.quoteString('foo'), "'foo'", 'returns quoted string');
+    assert.equal(qb.quoteString("' \" ' \\ "), "'\' \" \' \\ '", 'returns quoted string');
+  });
+
   test('QueryBuilder.where()', function f(assert) {
     var qb = new QueryBuilder();
     assert.notOk(qb.whereClause, 'not have a whereClause property');

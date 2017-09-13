@@ -22,10 +22,12 @@ Records.prototype.fetchNext = function fetchNext() {
 };
 
 Records.prototype.forEach = function forEach(func) {
+  var record = new Record();
+
   for (;;) {
     var records = this.records;
     for (var i = 0; i < records.length; i++) {
-      func(records[i]);
+      func(record.setRecord(records[i]));
     }
 
     if (!this.fetchNext()) {

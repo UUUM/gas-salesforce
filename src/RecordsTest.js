@@ -56,11 +56,16 @@ testRunner.functions.push(function (test) {
 
     var i = 0;
     records.forEach(function (record) {
-      if (i === 0) {
-        assert.ok(Obj.isObject(record.attributes), 'record has attributes property');
+      i++;
+
+      if (i !== 1) {
+        return;
       }
 
-      i++;
+      assert.ok(Obj.isObject(record), 'record is an object');
+      assert.ok(Obj.isObject(record.attributes), 'record has an attributes property');
+      assert.ok(Obj.isString(record.sobject), 'record has an sobject property');
+      assert.ok(Obj.isString(record.apiPath), 'record has an apiPath property');
     });
     assert.equal(records.total, i, 'calls a function thu number of records times');
   });

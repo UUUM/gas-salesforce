@@ -133,7 +133,7 @@ QueryBuilder.prototype.setupByParams = function setupByParams(params) {
 
   if (params.orderBy) {
     var orderBy = params.orderBy;
-    for (var i = 0; i < orderBy.length; i++) {
+    for (i = 0; i < orderBy.length; i++) {
       params.orderBy(orderBy[i][0], orderBy[i][1]);
     }
   }

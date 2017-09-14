@@ -256,6 +256,26 @@ testRunner.functions.push(function testFunc(test) {
     assert.equal(qb.quoteString("' \" ' \\ "), "'\' \" \' \\ '", 'returns quoted string');
   });
 
+  test('QueryBuilder.setupByParams()', function f(assert) {
+    var qb = new QueryBuilder();
+    qb.setupByParams({
+      from: 'Opportunity',
+      fields: ['Id', 'Name'],
+      groupBy: 'Name',
+      limit: 1,
+      offset: 2,
+      where: 'Id > :id and Name like :name',
+      params: {id: 3, name: '%a\'b%'}
+    });
+    assert.equal(qb.sobject, 'Opportunity', 'has an sobject property');
+    assert.deepEqual(qb.fieldList, ['Id', 'Name'], 'has a fieldList property');
+    assert.deepEqual(qb.groups, ['Name'], 'has a groups property');
+    assert.equal(qb.maxResults, 1, 'has a maxResults property');
+    assert.equal(qb.firstResult, 2, 'has a firstResult property');
+    assert.equal(qb.whereClause, 'Id > :id and Name like :name', 'has a whereClause property');
+    assert.deepEqual(qb.parameters, {id: 3, name: '%a\'b%'}, 'has a parameters property');
+  });
+
   test('QueryBuilder.where()', function f(assert) {
     var qb = new QueryBuilder();
     assert.notOk(qb.whereClause, 'not have a whereClause property');

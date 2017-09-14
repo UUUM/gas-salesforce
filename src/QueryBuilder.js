@@ -122,6 +122,25 @@ QueryBuilder.prototype.quoteString = function quoteString(str) {
   return "'" + str.replace("'", "\'") + "'";
 };
 
+QueryBuilder.prototype.setupByParams = function setupByParams(params) {
+  var keys = ['fields', 'from', 'groupBy', 'limit', 'offset', 'params', 'where'];
+  for (var i = 0; i < keys.length; i++) {
+    var key = keys[i];
+    if (params[key]) {
+      this[key](params[key]);
+    }
+  }
+
+  if (params.orderBy) {
+    var orderBy = params.orderBy;
+    for (var i = 0; i < orderBy.length; i++) {
+      params.orderBy(orderBy[i][0], orderBy[i][1]);
+    }
+  }
+
+  return this;
+};
+
 QueryBuilder.prototype.where = function where(whereClause) {
   if (!Obj.isString(whereClause)) {
     throw new Error('Where clause must be a string');

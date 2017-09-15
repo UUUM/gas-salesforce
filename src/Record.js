@@ -5,31 +5,50 @@ var Record = function Record(record) {
 };
 
 Record.prototype.get = function get(key) {
-  return this.params[key];
+  return this.record[key];
+};
+
+Record.prototype.getApiPath = function getApiPath() {
+  return this.record.attributes.url;
+};
+
+Record.prototype.getType = function getType() {
+  return this.record.attributes.type;
+};
+
+Record.prototype.getValues = function getValues() {
+  if (this.values) {
+    return this.values;
+  }
+
+  this.values = this._getValues(this.record);
+  return this.values;
 };
 
 Record.prototype.setRecord = function setRecord(record) {
-  if (!Obj.isObject(record)) {
+  if (!record || !Obj.isObject(record)) {
     throw new Error('record must be an object');
   }
 
-  this.attributes = record.attributes;
-  this.apiPath = record.attributes.url;
-  this.sobject = record.attributes.type;
+  this.record = record;
+  this.values = null;
 
-  var params = {};
+  return this;
+};
+
+Record.prototype._getValues = function _getValues(record) {
+  var values = {};
   for (var key in record) {
     if (!record.hasOwnProperty(key) || key === 'attributes') {
       continue;
     }
 
-    params[key] = record[key];
+    var value = record[key];
+    if (value.hasOwnProperty('attributes')) {
+      values[key] = this._getValues(value);
+    } else {
+      values[key] = value;
+    }
   }
-  this.params = params;
-
-  return this;
-};
-
-Record.prototype.toObject = function toObject() {
-  return this.params;
+  return values;
 };

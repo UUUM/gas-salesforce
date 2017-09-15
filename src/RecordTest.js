@@ -12,12 +12,27 @@ testRunner.functions.push(function (test) {
     assert.ok(Obj.isObject(record), 'record is an object');
   });
 
-  test('Record.setRecord', function (assert) {
+  test('Record.get()', function (assert) {
     var record = new Record(sobject);
-    assert.equal(record.get('Id'), '0062800000KkTKJAA3', 'returns a value');
+    assert.equal(record.get('Id'), sobject.Id, 'returns a value');
   });
 
-  test('Record.setRecord', function (assert) {
+  test('Record.getApiPath()', function (assert) {
+    var record = new Record(sobject);
+    assert.equal(record.getApiPath(), sobject.attributes.url, 'returns an apiPath');
+  });
+
+  test('Record.getType()', function (assert) {
+    var record = new Record(sobject);
+    assert.equal(record.getType(), sobject.attributes.type, 'returns a type');
+  });
+
+  test('Record.getValues()', function (assert) {
+    var record = new Record(sobject);
+    assert.deepEqual(record.getValues(), {Id: '0062800000KkTKJAA3'}, 'returns values');
+  });
+
+  test('Record.setRecord()', function (assert) {
     var record = new Record(sobject);
 
     assert.throws(
@@ -28,14 +43,7 @@ testRunner.functions.push(function (test) {
     );
 
     record.setRecord(sobject);
-    assert.deepEqual(record.attributes, sobject.attributes, 'record has an attributes property');
-    assert.equal(record.apiPath, sobject.attributes.url, 'record has an sobject property');
-    assert.equal(record.sobject, sobject.attributes.type, 'record has an apiPath property');
-  });
-
-  test('Record.toObject', function (assert) {
-    var record = new Record(sobject);
-    assert.deepEqual(record.toObject(), {Id: '0062800000KkTKJAA3'}, 'returns an object');
+    assert.deepEqual(record.record, sobject, 'record has a record property');
   });
 });
 

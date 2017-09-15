@@ -49,7 +49,7 @@ testRunner.functions.push(function (test) {
     assert.ok(ss.hasHeader, 'has a hasHeader property');
   });
 
-  test('Salesforce.sync()', function (assert) {
+  test('Salesforce.sync()', function () {
     setup();
 
     ss.sync();

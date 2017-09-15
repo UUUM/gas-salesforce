@@ -264,6 +264,7 @@ testRunner.functions.push(function testFunc(test) {
       groupBy: 'Name',
       limit: 1,
       offset: 2,
+      orderBy: [['Id', 'DESC']],
       where: 'Id > :id and Name like :name',
       params: {id: 3, name: '%a\'b%'}
     });
@@ -272,6 +273,7 @@ testRunner.functions.push(function testFunc(test) {
     assert.deepEqual(qb.groups, ['Name'], 'has a groups property');
     assert.equal(qb.maxResults, 1, 'has a maxResults property');
     assert.equal(qb.firstResult, 2, 'has a firstResult property');
+    assert.deepEqual(qb.orders, ['Id DESC'], 'has a orders property');
     assert.equal(qb.whereClause, 'Id > :id and Name like :name', 'has a whereClause property');
     assert.deepEqual(qb.parameters, {id: 3, name: '%a\'b%'}, 'has a parameters property');
   });

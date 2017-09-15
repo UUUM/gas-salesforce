@@ -4,6 +4,7 @@
     HtmlService: true,
     Logger: true,
     PropertiesService: true,
+    SpreadsheetApp: true,
     UrlFetchApp: true,
 
     // External Libraries
@@ -22,6 +23,7 @@
     Response: true,
     ResponseError: true,
     Salesforce: true,
+    Spreadsheet: true,
     TestCommon: true,
 
     // test function

@@ -4,7 +4,14 @@ testRunner.functions.push(function (test) {
       type: 'Opportunity',
       url: '/services/data/v40.0/sobjects/Opportunity/0062800000KkTKJAA3'
     },
-    Id: '0062800000KkTKJAA3'
+    Id: '0062800000KkTKJAA3',
+    Account: {
+      attributes: {
+        type: 'Account',
+        url: '/services/data/v40.0/sobjects/Account/00128000008zBAoAAM'
+      },
+      Id: '00128000008zBAoAAM'
+    }
   };
 
   test('new Record()', function (assert) {
@@ -14,7 +21,8 @@ testRunner.functions.push(function (test) {
 
   test('Record.get()', function (assert) {
     var record = new Record(sobject);
-    assert.equal(record.get('Id'), sobject.Id, 'returns a value');
+    assert.equal(record.get('Id'), sobject.Id, 'returns Id');
+    assert.equal(record.get('Account.Id'), sobject.Account.Id, 'returns Account.Id');
   });
 
   test('Record.getApiPath()', function (assert) {
@@ -29,7 +37,13 @@ testRunner.functions.push(function (test) {
 
   test('Record.getValues()', function (assert) {
     var record = new Record(sobject);
-    assert.deepEqual(record.getValues(), {Id: '0062800000KkTKJAA3'}, 'returns values');
+    var values = {
+      Id: '0062800000KkTKJAA3',
+      Account: {
+        Id: '00128000008zBAoAAM'
+      }
+    };
+    assert.deepEqual(record.getValues(), values, 'returns values');
   });
 
   test('Record.setRecord()', function (assert) {

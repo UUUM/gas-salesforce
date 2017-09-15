@@ -5,7 +5,12 @@ var Record = function Record(record) {
 };
 
 Record.prototype.get = function get(key) {
-  return this.record[key];
+  var value = this.getValues();
+  var keys = key.split('.');
+  for (var i = 0; i < keys.length; i++) {
+    value = value[keys[i]];
+  }
+  return value;
 };
 
 Record.prototype.getApiPath = function getApiPath() {

@@ -134,7 +134,7 @@ QueryBuilder.prototype.setupByParams = function setupByParams(params) {
   if (params.orderBy) {
     var orderBy = params.orderBy;
     for (i = 0; i < orderBy.length; i++) {
-      params.orderBy(orderBy[i][0], orderBy[i][1]);
+      this.orderBy(orderBy[i][0], orderBy[i][1]);
     }
   }
 

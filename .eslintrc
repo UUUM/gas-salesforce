@@ -2,6 +2,7 @@
   globals: {
     // Google Apps Script
     HtmlService: true,
+    Logger: true,
     PropertiesService: true,
     UrlFetchApp: true,
 

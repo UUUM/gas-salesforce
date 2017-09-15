@@ -14,6 +14,11 @@ testRunner.functions.push(function (test) {
 
   test('Record.setRecord', function (assert) {
     var record = new Record(sobject);
+    assert.equal(record.get('Id'), '0062800000KkTKJAA3', 'returns a value');
+  });
+
+  test('Record.setRecord', function (assert) {
+    var record = new Record(sobject);
 
     assert.throws(
       function () {

@@ -4,6 +4,10 @@ var Record = function Record(record) {
   }
 };
 
+Record.prototype.get = function get(key) {
+  return this.params[key];
+};
+
 Record.prototype.setRecord = function setRecord(record) {
   if (!Obj.isObject(record)) {
     throw new Error('record must be an object');

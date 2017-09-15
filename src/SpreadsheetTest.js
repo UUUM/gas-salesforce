@@ -10,7 +10,7 @@ testRunner.functions.push(function (test) {
     sheet = common.getSpreadsheet().getSheetByName('Opportunity');
     qb = (new QueryBuilder())
       .from('Opportunity')
-      .fields(['Id', 'Name'])
+      .fields(['Id', 'Name', 'Account.Id', 'Account.Name'])
       .limit(10);
     ss = new Spreadsheet(sf, sheet, qb);
   }

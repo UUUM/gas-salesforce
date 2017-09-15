@@ -34,11 +34,11 @@ QueryBuilder.prototype.getQuery = function getQuery() {
     query += ' ORDER BY ' + this.orders.join(', ');
   }
 
-  if (this.limit) {
+  if (this.maxResults) {
     query += ' LIMIT ' + this.maxResults;
   }
 
-  if (this.offset) {
+  if (this.firstResult) {
     query += ' OFFSET ' + this.firstResult;
   }
 

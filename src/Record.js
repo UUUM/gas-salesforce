@@ -9,6 +9,9 @@ Record.prototype.get = function get(key) {
   var keys = key.split('.');
   for (var i = 0; i < keys.length; i++) {
     value = value[keys[i]];
+    if (!value) {
+      break;
+    }
   }
   return value;
 };
@@ -49,7 +52,7 @@ Record.prototype._getValues = function _getValues(record) {
     }
 
     var value = record[key];
-    if (value.hasOwnProperty('attributes')) {
+    if (value && value.hasOwnProperty('attributes')) {
       values[key] = this._getValues(value);
     } else {
       values[key] = value;

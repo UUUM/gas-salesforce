@@ -11,7 +11,8 @@ testRunner.functions.push(function (test) {
         url: '/services/data/v40.0/sobjects/Account/00128000008zBAoAAM'
       },
       Id: '00128000008zBAoAAM'
-    }
+    },
+    OpportunityLineItem: null
   };
 
   test('new Record()', function (assert) {
@@ -23,6 +24,8 @@ testRunner.functions.push(function (test) {
     var record = new Record(sobject);
     assert.equal(record.get('Id'), sobject.Id, 'returns Id');
     assert.equal(record.get('Account.Id'), sobject.Account.Id, 'returns Account.Id');
+    assert.equal(record.get('OpportunityLineItem'), null, 'returns null for OpportunityLineItem');
+    assert.equal(record.get('OpportunityLineItem.Name'), null, 'returns null for OpportunityLineItem.Name');
   });
 
   test('Record.getApiPath()', function (assert) {
@@ -41,7 +44,8 @@ testRunner.functions.push(function (test) {
       Id: '0062800000KkTKJAA3',
       Account: {
         Id: '00128000008zBAoAAM'
-      }
+      },
+      OpportunityLineItem: null
     };
     assert.deepEqual(record.getValues(), values, 'returns values');
   });

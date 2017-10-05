@@ -23,7 +23,6 @@
     Response: true,
     ResponseError: true,
     Salesforce: true,
-    Spreadsheet: true,
     TestCommon: true,
 
     // test function

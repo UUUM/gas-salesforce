@@ -16,6 +16,15 @@ var TestCommon = function TestCommon() {
   this.spreadsheetId = properties.getProperty('spreadsheetId');
 };
 
+TestCommon.prototype.getAPI = function getAPI() {
+  if (this.api) {
+    return this.api;
+  }
+
+  this.api = new API(this.version, this.clientId, this.clientSecret);
+  return this.api;
+};
+
 TestCommon.prototype.getClient = function getClient() {
   if (this.client) {
     return this.client;
@@ -23,15 +32,6 @@ TestCommon.prototype.getClient = function getClient() {
 
   this.client = new Client(this.version, this.clientId, this.clientSecret);
   return this.client;
-};
-
-TestCommon.prototype.getSalesforce = function createSalesforce() {
-  if (this.sf) {
-    return this.sf;
-  }
-
-  this.sf = new Salesforce(this.version, this.clientId, this.clientSecret);
-  return this.sf;
 };
 
 TestCommon.prototype.getSpreadsheet = function getSpreadsheet() {

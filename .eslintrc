@@ -14,6 +14,7 @@
     _: true,
 
     // Our classes
+    API: true,
     Client: true,
     OAuth2Client: true,
     Obj: true,
@@ -22,7 +23,6 @@
     Records: true,
     Response: true,
     ResponseError: true,
-    Salesforce: true,
     TestCommon: true,
 
     // test function

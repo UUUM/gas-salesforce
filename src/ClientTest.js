@@ -50,8 +50,6 @@ testRunner.functions.push(function (test, common) {
     client = new Client(version, clientId, clientSecret);
     assert.ok(client instanceof Client, 'creates Client object with a valid argument');
     assert.equal(client.version, version, 'has a version property');
-    assert.equal(client.clientId, clientId, 'has a clientId property');
-    assert.equal(client.clientSecret, clientSecret, 'has a clientSecret property');
     assert.equal(client.option.contentType, 'application/json', 'has a valid content type');
     assert.equal(client.option.muteHttpExceptions, true, 'has a valid muteHttpExceptions value');
     assert.ok(client.oauth2 instanceof OAuth2Client, 'has a oauth2 property');

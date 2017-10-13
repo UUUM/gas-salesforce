@@ -1,7 +1,23 @@
-var OAuth2Client = function OAuth2Client(serviceName) {
-  this.serviceName = serviceName;
-  this.service = this.createService(serviceName);
+var OAuth2Client = function OAuth2Client(clientId, clientSecret) {
+  if (!Obj.isString(clientId) || clientId.length < 1) {
+    throw new Error('clientId must be specified');
+  }
+  this.clientId = clientId;
+
+  if (!Obj.isString(clientSecret) || clientSecret.length < 1) {
+    throw new Error('clientSecret must be specified');
+  }
+  this.clientSecret = clientSecret;
+
+  this.service = this.createService();
 };
+
+OAuth2Client.prototype.serviceName = 'salesforce';
+
+OAuth2Client.prototype.authorizationBaseUrl = 'https://login.salesforce.com/services/oauth2/authorize';
+OAuth2Client.prototype.tokenUrl = 'https://login.salesforce.com/services/oauth2/token';
+
+OAuth2Client.prototype.callbackFunction = 'authCallback';
 
 OAuth2Client.prototype.callback = function callback(request) {
   var isAuthorized = this.handleCallback(request);
@@ -11,10 +27,17 @@ OAuth2Client.prototype.callback = function callback(request) {
   return HtmlService.createHtmlOutput('Denied. You can close this tab');
 };
 
-OAuth2Client.prototype.createService = function createService(serviceName) {
-  var service = OAuth2.createService(serviceName);
+OAuth2Client.prototype.createService = function createService() {
+  var service = OAuth2.createService(this.serviceName);
 
-  // Set the property store where authorized tokens should be persisted.
+  service.setAuthorizationBaseUrl(this.authorizationBaseUrl);
+  service.setTokenUrl(this.tokenUrl);
+
+  service.setClientId(this.clientId);
+  service.setClientSecret(this.clientSecret);
+
+  service.setCallbackFunction(this.callbackFunction);
+
   service.setPropertyStore(PropertiesService.getUserProperties());
 
   return service;

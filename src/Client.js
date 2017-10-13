@@ -4,17 +4,7 @@ var Client = function Client(version, clientId, clientSecret) {
   }
   this.version = version;
 
-  if (!Obj.isString(clientId) || clientId.length < 1) {
-    throw new Error('clientId must be specified');
-  }
-  this.clientId = clientId;
-
-  if (!Obj.isString(clientSecret) || clientSecret.length < 1) {
-    throw new Error('clientSecret must be specified');
-  }
-  this.clientSecret = clientSecret;
-
-  this.oauth2 = this.createOAuth2();
+  this.oauth2 = new OAuth2Client(clientId, clientSecret);
 
   this.option = {
     contentType: 'application/json',
@@ -23,29 +13,6 @@ var Client = function Client(version, clientId, clientSecret) {
     }),
     muteHttpExceptions: true
   };
-};
-
-
-Client.prototype.serviceName = 'salesforce';
-
-Client.prototype.authorizationBaseUrl = 'https://login.salesforce.com/services/oauth2/authorize';
-Client.prototype.tokenUrl = 'https://login.salesforce.com/services/oauth2/token';
-
-Client.prototype.callback = 'authCallback';
-
-
-Client.prototype.createOAuth2 = function createOAuth2() {
-  var oauth2 = new OAuth2Client(this.serviceName);
-
-  oauth2.setAuthorizationBaseUrl(this.authorizationBaseUrl);
-  oauth2.setTokenUrl(this.tokenUrl);
-
-  oauth2.setClientId(this.clientId);
-  oauth2.setClientSecret(this.clientSecret);
-
-  oauth2.setCallback(this.callback);
-
-  return oauth2;
 };
 
 Client.prototype.createQueryString = function createQueryString(params) {

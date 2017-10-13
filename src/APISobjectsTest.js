@@ -8,6 +8,17 @@ testRunner.functions.push(function (test, common) {
     assert.equal(api.pathPrefix, 'sobjects/Account/', 'has a pathPrefix property');
   });
 
+  test('APISobjects CRUD', function (assert) {
+    var result = api.create({ Name: 'foo' });
+    assert.ok(Obj.isObject(result), 'returns result');
+
+    var id = result.id;
+    Logger.log(api.get(id));
+    Logger.log(api.update(id, { Name: 'bar' }));
+    Logger.log(api.get(id));
+    api.remove(id);
+  });
+
   test('APISobjects.describe()', function (assert) {
     var describe = api.describe();
     assert.ok(Obj.isObject(describe), 'returns describe');

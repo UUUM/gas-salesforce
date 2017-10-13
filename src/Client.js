@@ -91,6 +91,18 @@ Client.prototype.getAuthorizationHeader = function getAuthorizationHeader() {
   return { Authorization: 'Bearer ' + this.oauth2.getAccessToken() };
 };
 
+Client.prototype.jsonDelete = function jsonDelete(path, params) {
+  return this.fetchDelete(path, params).getContentJson();
+};
+
 Client.prototype.jsonGet = function jsonGet(path, params) {
   return this.fetchGet(path, params).getContentJson();
+};
+
+Client.prototype.jsonPatch = function jsonPatch(path, params) {
+  return this.fetchPatch(path, params).getContentJson();
+};
+
+Client.prototype.jsonPost = function jsonPost(path, params) {
+  return this.fetchPost(path, params).getContentJson();
 };

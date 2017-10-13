@@ -6,6 +6,11 @@ testRunner.functions.push(function (test, common) {
     assert.ok(api.client instanceof Client, 'has a client property');
   });
 
+  test('API.limits()', function (assert) {
+    var limits = api.limits();
+    assert.ok(Obj.isObject(limits), 'returns limits');
+  });
+
   test('API.oauth2DoGet()', function (assert) {
     var output = api.oauth2DoGet();
     assert.ok(Obj.isGASObject(output, 'HtmlOutput'), 'returns HtmlOutput object');

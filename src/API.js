@@ -6,6 +6,10 @@ API.prototype.jsonGet = function jsonGet(path, params) {
   return this.client.fetchGet(path, params).getContentJson();
 };
 
+API.prototype.limits = function limits() {
+  return this.jsonGet('limits');
+};
+
 API.prototype.oauth2Callback = function oauth2Callback(request) {
   return this.client.oauth2.callback(request);
 };

@@ -18,3 +18,12 @@ API.prototype.query = function query(soql) {
 
   return new Records(this.client, response);
 };
+
+API.prototype.versions = function versions() {
+  var response = this.client.fetchGet('/services/data/');
+  if (response instanceof ResponseError) {
+    return response;
+  }
+
+  return response.getContentJson();
+};

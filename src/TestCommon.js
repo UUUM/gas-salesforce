@@ -16,15 +16,6 @@ var TestCommon = function TestCommon() {
   this.spreadsheetId = properties.getProperty('spreadsheetId');
 };
 
-TestCommon.prototype.getAPI = function getAPI() {
-  if (this.api) {
-    return this.api;
-  }
-
-  this.api = new API(this.version, this.clientId, this.clientSecret);
-  return this.api;
-};
-
 TestCommon.prototype.getClient = function getClient() {
   if (this.client) {
     return this.client;

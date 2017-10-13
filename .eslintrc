@@ -15,6 +15,7 @@
 
     // Our classes
     API: true,
+    APISobjects: true,
     Client: true,
     OAuth2Client: true,
     Obj: true,

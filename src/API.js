@@ -1,5 +1,5 @@
-var API = function API(version, clientId, clientSecret) {
-  this.client = new Client(version, clientId, clientSecret);
+var API = function API(client) {
+  this.client = client;
 };
 
 API.prototype.limits = function limits() {
@@ -21,14 +21,6 @@ API.prototype.query = function query(soql) {
 
 API.prototype.resources = function resources() {
   return this.client.jsonGet('');
-};
-
-API.prototype.sobjectDescribe = function sobjectDescribe(name) {
-  return this.client.jsonGet('sobjects/' + name + '/describe');
-};
-
-API.prototype.sobjectInfo = function sobjectInfo(name) {
-  return this.client.jsonGet('sobjects/' + name);
 };
 
 API.prototype.sobjects = function sobjects() {

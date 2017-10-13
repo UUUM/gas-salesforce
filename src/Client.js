@@ -50,7 +50,7 @@ Client.prototype.fetch = function fetch(method, path, queryParams, bodyParams) {
   if (Math.floor(response.getResponseCode() / 100) === 2) {
     return response;
   }
-  return new ResponseError(response);
+  throw new ResponseError(response);
 };
 
 Client.prototype.fetchDelete = function fetchDelete(path, params) {

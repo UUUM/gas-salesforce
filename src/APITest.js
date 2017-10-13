@@ -15,8 +15,12 @@ testRunner.functions.push(function (test, common) {
     var records = api.query('SELECT Id FROM Opportunity');
     assert.ok(records instanceof Records, 'returns a Records object');
 
-    var error = api.query('SELECT * FROM Opportunity');
-    assert.ok(error instanceof ResponseError, 'returns a ResponseError object');
+    assert.throws(
+      function () {
+        api.query('SELECT * FROM Opportunity');
+      },
+      'throws a ResponseError'
+    );
   });
 
   test('API.versions()', function (assert) {

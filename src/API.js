@@ -27,6 +27,10 @@ API.prototype.resources = function resources() {
   return this.jsonGet('');
 };
 
+API.prototype.sobjects = function sobjects() {
+  return this.jsonGet('sobjects');
+};
+
 API.prototype.versions = function versions() {
   return this.jsonGet('/services/data/');
 };

@@ -33,6 +33,11 @@ testRunner.functions.push(function (test, common) {
     assert.ok(Obj.isObject(resources), 'returns resources');
   });
 
+  test('API.sobjects()', function (assert) {
+    var sobjects = api.sobjects();
+    assert.ok(Obj.isObject(sobjects), 'returns sobjects');
+  });
+
   test('API.versions()', function (assert) {
     var versions = api.versions();
     assert.ok(Obj.isArray(versions), 'returns versions');

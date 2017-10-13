@@ -2,6 +2,10 @@ var API = function API(version, clientId, clientSecret) {
   this.client = new Client(version, clientId, clientSecret);
 };
 
+API.prototype.jsonGet = function jsonGet(path, params) {
+  return this.client.fetchGet(path, params).getContentJson();
+};
+
 API.prototype.oauth2Callback = function oauth2Callback(request) {
   return this.client.oauth2.callback(request);
 };
@@ -15,6 +19,10 @@ API.prototype.query = function query(soql) {
   return new Records(this.client, response);
 };
 
+API.prototype.resources = function resources() {
+  return this.jsonGet('');
+};
+
 API.prototype.versions = function versions() {
-  return this.client.fetchGet('/services/data/').getContentJson();
+  return this.jsonGet('/services/data/');
 };

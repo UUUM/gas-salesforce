@@ -23,6 +23,11 @@ testRunner.functions.push(function (test, common) {
     );
   });
 
+  test('API.resources()', function (assert) {
+    var resources = api.resources();
+    assert.ok(Obj.isObject(resources), 'returns resources');
+  });
+
   test('API.versions()', function (assert) {
     var versions = api.versions();
     assert.ok(Obj.isArray(versions), 'returns versions');

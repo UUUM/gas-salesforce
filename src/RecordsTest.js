@@ -1,22 +1,8 @@
-testRunner.functions.push(function (test) {
-  var client;
-  var records;
-  var response;
-
-  function setup() {
-    var common = new TestCommon();
-    client = common.createClient();
-
-    if (!response) {
-      response = client.fetchGet('query', { q: 'SELECT Id FROM Opportunity' });
-    }
-
-    records = new Records(client, response);
-  }
+testRunner.functions.push(function (test, common) {
+  var client = common.getClient();
+  var response = client.fetchGet('query', { q: 'SELECT Id FROM Opportunity' });
 
   test('new Records()', function (assert) {
-    setup();
-
     assert.throws(
       function () {
         return new Records(null, response);
@@ -31,13 +17,13 @@ testRunner.functions.push(function (test) {
       'throws an exception if response was not a Response object'
     );
 
-    records = new Records(client, response);
+    var records = new Records(client, response);
     assert.ok(records.client instanceof Client, 'has a client property');
     assert.ok(records.response instanceof Response, 'has a response property');
   });
 
   test('Records.fetchNext', function (assert) {
-    setup();
+    var records = new Records(client, response);
 
     for (;;) {
       if (records.content.done) {
@@ -52,7 +38,7 @@ testRunner.functions.push(function (test) {
   });
 
   test('Records.forEach', function (assert) {
-    setup();
+    var records = new Records(client, response);
 
     var i = 0;
     records.forEach(function (record) {
@@ -68,10 +54,9 @@ testRunner.functions.push(function (test) {
   });
 
   test('Records.setResponse', function (assert) {
-    setup();
+    var records = new Records(client, response);
 
     records.setResponse(response);
-
     assert.ok(records.response instanceof Response, 'has a response property');
     assert.ok(records.content instanceof Object, 'has a content property');
     assert.ok(Obj.isString(records.nextApiPath), 'has a nextApiPath property');

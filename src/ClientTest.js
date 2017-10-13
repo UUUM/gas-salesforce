@@ -1,20 +1,10 @@
-testRunner.functions.push(function (test) {
-  var client;
-  var clientId;
-  var clientSecret;
-  var version;
-
-  function setup() {
-    var common = new TestCommon();
-    version = common.version;
-    clientId = common.clientId;
-    clientSecret = common.clientSecret;
-    client = common.createClient();
-  }
+testRunner.functions.push(function (test, common) {
+  var client = common.getClient();
+  var clientId = common.clientId;
+  var clientSecret = common.clientSecret;
+  var version = common.version;
 
   test('new Client()', function (assert) {
-    setup();
-
     assert.throws(
       function () {
         return new Client(1, clientId, clientSecret);
@@ -68,8 +58,6 @@ testRunner.functions.push(function (test) {
   });
 
   test('Client.createQueryString()', function (assert) {
-    setup();
-
     var queryString = client.createQueryString({});
     assert.equal(queryString, '', 'returns an empty string with no parameters');
 
@@ -81,15 +69,11 @@ testRunner.functions.push(function (test) {
   });
 
   test('Client.getApiPath()', function (assert) {
-    setup();
-
     assert.equal('/services/data/v40.0/query', client.getApiPath('query'), 'returns a valid api path');
     assert.equal('/query', client.getApiPath('/query'), 'returns a path itself if it starts with /');
   });
 
   test('Client.getApiUrl()', function (assert) {
-    setup();
-
     assert.equal(
       client.getApiUrl('query'),
       'https://uuum.my.salesforce.com/services/data/v40.0/query',
@@ -104,8 +88,6 @@ testRunner.functions.push(function (test) {
   });
 
   test('Client.getAuthorizationHeader()', function (assert) {
-    setup();
-
     assert.deepEqual(
       client.getAuthorizationHeader(),
       { Authorization: 'Bearer ' + client.oauth2.getAccessToken() },

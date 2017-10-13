@@ -1,6 +1,6 @@
-testRunner.functions.push(function (test) {
+testRunner.functions.push(function (test, common) {
   test('new ResponseError()', function (assert) {
-    var client = (new TestCommon()).createClient();
+    var client = common.getClient();
 
     var url = client.getApiUrl('foo');
     var option = {

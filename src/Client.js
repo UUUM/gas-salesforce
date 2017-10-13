@@ -90,3 +90,7 @@ Client.prototype.getApiUrl = function getApiUrl(path, params) {
 Client.prototype.getAuthorizationHeader = function getAuthorizationHeader() {
   return { Authorization: 'Bearer ' + this.oauth2.getAccessToken() };
 };
+
+Client.prototype.jsonGet = function jsonGet(path, params) {
+  return this.fetchGet(path, params).getContentJson();
+};

@@ -2,12 +2,8 @@ var API = function API(version, clientId, clientSecret) {
   this.client = new Client(version, clientId, clientSecret);
 };
 
-API.prototype.jsonGet = function jsonGet(path, params) {
-  return this.client.fetchGet(path, params).getContentJson();
-};
-
 API.prototype.limits = function limits() {
-  return this.jsonGet('limits');
+  return this.client.jsonGet('limits');
 };
 
 API.prototype.oauth2Callback = function oauth2Callback(request) {
@@ -24,21 +20,21 @@ API.prototype.query = function query(soql) {
 };
 
 API.prototype.resources = function resources() {
-  return this.jsonGet('');
+  return this.client.jsonGet('');
 };
 
 API.prototype.sobjectDescribe = function sobjectDescribe(name) {
-  return this.jsonGet('sobjects/' + name + '/describe');
+  return this.client.jsonGet('sobjects/' + name + '/describe');
 };
 
 API.prototype.sobjectInfo = function sobjectInfo(name) {
-  return this.jsonGet('sobjects/' + name);
+  return this.client.jsonGet('sobjects/' + name);
 };
 
 API.prototype.sobjects = function sobjects() {
-  return this.jsonGet('sobjects');
+  return this.client.jsonGet('sobjects');
 };
 
 API.prototype.versions = function versions() {
-  return this.jsonGet('/services/data/');
+  return this.client.jsonGet('/services/data/');
 };

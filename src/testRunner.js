@@ -2,6 +2,11 @@ function testRunner() {
   var test = new GasTap();
   var common = new TestCommon();
 
+  if (!common.getClient().hasAccess()) {
+    Logger.log('Authorize by Salesforce, first');
+    return;
+  }
+
   var functions = testRunner.functions;
   for (var i = 0; i < functions.length; i++) {
     try {

@@ -4,7 +4,11 @@ var APISobjects = function APISobjects(client, name) {
 };
 
 APISobjects.prototype.create = function create(params) {
-  return this.client.jsonPost(this.getPath(), params);
+  var result = this.client.jsonPost(this.getPath(), params);
+  if (result.success) {
+    return result.id;
+  }
+  return result.errors;
 };
 
 APISobjects.prototype.describe = function describe() {
@@ -16,7 +20,7 @@ APISobjects.prototype.get = function get(id, fields) {
   if (fields) {
     params.fields = fields.join(',');
   }
-  return this.client.jsonGet(this.getPath(id), params);
+  return new Record(this.client.jsonGet(this.getPath(id), params));
 };
 
 APISobjects.prototype.getPath = function getPath(path) {
@@ -37,5 +41,6 @@ APISobjects.prototype.remove = function remove(id) {
 };
 
 APISobjects.prototype.update = function update(id, params) {
-  return this.client.jsonPatch(this.getPath(id), params);
+  this.client.fetchPatch(this.getPath(id), params);
+  return true;
 };

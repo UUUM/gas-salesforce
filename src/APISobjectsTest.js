@@ -9,14 +9,18 @@ testRunner.functions.push(function (test, common) {
   });
 
   test('APISobjects CRUD', function (assert) {
-    var result = api.create({ Name: 'foo' });
-    assert.ok(Obj.isObject(result), 'returns result');
+    var id = api.create({ Name: 'foo' });
+    assert.ok(Obj.isString(id), 'returns id');
 
-    var id = result.id;
-    Logger.log(api.get(id));
-    Logger.log(api.update(id, { Name: 'bar' }));
-    Logger.log(api.get(id));
-    api.remove(id);
+    var record = api.get(id);
+    assert.ok(record instanceof Record, 'returns Record object');
+    assert.equal(record.get('Name'), 'foo', 'has an exact Name column');
+
+    assert.ok(api.update(id, { Name: 'bar' }), 'returns true update()');
+    record = api.get(id);
+    assert.equal(record.get('Name'), 'bar', 'Name has been changed');
+
+    assert.ok(api.remove(id), 'return true for remove()');
   });
 
   test('APISobjects.describe()', function (assert) {

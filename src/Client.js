@@ -97,7 +97,7 @@ Client.prototype.hasAccess = function hasAccess() {
   }
 
   try {
-    this.fetchGet('/services/data/');
+    this.fetchGet('');
     return true;
   } catch (e) {
     if (e instanceof ResponseError && e.response.getResponseCode() === 401) {

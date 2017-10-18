@@ -1,4 +1,7 @@
 var API = function API(client) {
+  if (!(client instanceof Client)) {
+    throw new Error('client must be a Client object');
+  }
   this.client = client;
 };
 

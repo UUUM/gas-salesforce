@@ -3,6 +3,13 @@ testRunner.functions.push(function (test, common) {
   var api = new API(client);
 
   test('new API()', function (assert) {
+    assert.throws(
+      function () {
+        return new API();
+      },
+      'throws an exception if client was not a Client object'
+    );
+
     assert.ok(api instanceof API, 'creates API object with a valid argument');
     assert.ok(api.client instanceof Client, 'has a client property');
   });

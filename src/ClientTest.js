@@ -1,61 +1,40 @@
 testRunner.functions.push(function (test, common) {
-  var client = common.getClient();
-  var clientId = common.clientId;
-  var clientSecret = common.clientSecret;
-  var version = common.version;
-
   test('new Client()', function (assert) {
+    var oauth2client = common.getOAuth2Client();
+    var version = common.version;
+
     assert.throws(
       function () {
-        return new Client(1, clientId, clientSecret);
+        return new Client(1, oauth2client);
       },
       'throws an exception if version was not a string'
     );
 
     assert.throws(
       function () {
-        return new Client('', clientId, clientSecret);
+        return new Client('', oauth2client);
       },
       'throws an exception if version was an empty string'
     );
 
     assert.throws(
       function () {
-        return new Client(version, 1, clientSecret);
+        return new Client(version, {});
       },
-      'throws an exception if clientId was not a string'
+      'throws an exception if oauth2client was not an OAuth2Client object'
     );
 
-    assert.throws(
-      function () {
-        return new Client(version, '', clientSecret);
-      },
-      'throws an exception if clientId was an empty string'
-    );
-
-    assert.throws(
-      function () {
-        return new Client(version, clientId, 1);
-      },
-      'throws an exception if clientSecret was not a string'
-    );
-
-    assert.throws(
-      function () {
-        return new Client(version, clientId, '');
-      },
-      'throws an exception if clientSecret was an empty string'
-    );
-
-    client = new Client(version, clientId, clientSecret);
+    var client = new Client(version, oauth2client);
     assert.ok(client instanceof Client, 'creates Client object with a valid argument');
     assert.equal(client.version, version, 'has a version property');
     assert.equal(client.option.contentType, 'application/json', 'has a valid content type');
     assert.equal(client.option.muteHttpExceptions, true, 'has a valid muteHttpExceptions value');
-    assert.ok(client.oauth2 instanceof OAuth2Client, 'has a oauth2 property');
+    assert.ok(client.oauth2client instanceof OAuth2Client, 'has a oauth2client property');
   });
 
   test('Client.createQueryString()', function (assert) {
+    var client = common.getClient();
+
     var queryString = client.createQueryString({});
     assert.equal(queryString, '', 'returns an empty string with no parameters');
 
@@ -67,11 +46,15 @@ testRunner.functions.push(function (test, common) {
   });
 
   test('Client.getApiPath()', function (assert) {
+    var client = common.getClient();
+
     assert.equal('/services/data/v40.0/query', client.getApiPath('query'), 'returns a valid api path');
     assert.equal('/query', client.getApiPath('/query'), 'returns a path itself if it starts with /');
   });
 
   test('Client.getApiUrl()', function (assert) {
+    var client = common.getClient();
+
     assert.equal(
       client.getApiUrl('query'),
       'https://uuum.my.salesforce.com/services/data/v40.0/query',
@@ -86,9 +69,12 @@ testRunner.functions.push(function (test, common) {
   });
 
   test('Client.getAuthorizationHeader()', function (assert) {
+    var client = common.getClient();
+    var oauth2client = common.getOAuth2Client();
+
     assert.deepEqual(
       client.getAuthorizationHeader(),
-      { Authorization: 'Bearer ' + client.oauth2.getAccessToken() },
+      { Authorization: 'Bearer ' + oauth2client.getAccessToken() },
       'returns a valid authorization header'
     );
   });

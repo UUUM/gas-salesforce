@@ -10,11 +10,11 @@ API.prototype.limits = function limits() {
 };
 
 API.prototype.oauth2Callback = function oauth2Callback(request) {
-  return this.client.oauth2.callback(request);
+  return this.client.oauth2client.callback(request);
 };
 
 API.prototype.oauth2DoGet = function oauth2DoGet(e) {
-  return this.client.oauth2.doGet(e);
+  return this.client.oauth2client.doGet(e);
 };
 
 API.prototype.query = function query(soql) {

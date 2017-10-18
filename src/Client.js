@@ -1,10 +1,13 @@
-var Client = function Client(version, clientId, clientSecret) {
+var Client = function Client(version, oauth2client) {
   if (!Obj.isString(version) || version.length < 1) {
     throw new Error('version must be specified');
   }
   this.version = version;
 
-  this.oauth2 = new OAuth2Client(clientId, clientSecret);
+  if (!(oauth2client instanceof OAuth2Client)) {
+    throw new Error('oauth2client must be an OAuth2Client object');
+  }
+  this.oauth2client = oauth2client;
 
   this.option = {
     contentType: 'application/json',
@@ -77,7 +80,7 @@ Client.prototype.getApiPath = function getApiPath(path) {
 };
 
 Client.prototype.getApiUrl = function getApiUrl(path, params) {
-  var url = this.oauth2.getInstanceUrl() + this.getApiPath(path);
+  var url = this.oauth2client.getInstanceUrl() + this.getApiPath(path);
 
   var queryString = this.createQueryString(params);
   if (queryString) {
@@ -88,11 +91,11 @@ Client.prototype.getApiUrl = function getApiUrl(path, params) {
 };
 
 Client.prototype.getAuthorizationHeader = function getAuthorizationHeader() {
-  return { Authorization: 'Bearer ' + this.oauth2.getAccessToken() };
+  return { Authorization: 'Bearer ' + this.oauth2client.getAccessToken() };
 };
 
 Client.prototype.hasAccess = function hasAccess() {
-  if (!this.oauth2.hasAccess()) {
+  if (!this.oauth2client.hasAccess()) {
     return false;
   }
 

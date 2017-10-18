@@ -21,7 +21,7 @@ TestCommon.prototype.getClient = function getClient() {
     return this.client;
   }
 
-  this.client = new Client(this.version, this.clientId, this.clientSecret);
+  this.client = new Client(this.version, this.getOAuth2Client());
   return this.client;
 };
 

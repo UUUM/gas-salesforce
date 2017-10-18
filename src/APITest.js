@@ -19,11 +19,6 @@ testRunner.functions.push(function (test, common) {
     assert.ok(Obj.isObject(limits), 'returns limits');
   });
 
-  test('API.oauth2DoGet()', function (assert) {
-    var output = api.oauth2DoGet();
-    assert.ok(Obj.isGASObject(output, 'HtmlOutput'), 'returns HtmlOutput object');
-  });
-
   test('API.query()', function (assert) {
     var records = api.query('SELECT Id FROM Opportunity');
     assert.ok(records instanceof Records, 'returns a Records object');

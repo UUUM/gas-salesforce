@@ -9,14 +9,6 @@ API.prototype.limits = function limits() {
   return this.client.jsonGet('limits');
 };
 
-API.prototype.oauth2Callback = function oauth2Callback(request) {
-  return this.client.oauth2client.callback(request);
-};
-
-API.prototype.oauth2DoGet = function oauth2DoGet(e) {
-  return this.client.oauth2client.doGet(e);
-};
-
 API.prototype.query = function query(soql) {
   var response = this.client.fetchGet('query', { q: soql });
   return new Records(this.client, response);

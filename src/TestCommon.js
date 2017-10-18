@@ -1,9 +1,9 @@
 function doGet(e) {
-  return (new TestCommon()).getClient().oauth2.doGet(e);
+  return (new TestCommon()).getOAuth2Client().doGet(e);
 }
 
 function authCallback(request) {
-  return (new TestCommon()).getClient().oauth2.callback(request);
+  return (new TestCommon()).getOAuth2Client().callback(request);
 }
 
 var TestCommon = function TestCommon() {

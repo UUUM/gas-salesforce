@@ -25,6 +25,15 @@ TestCommon.prototype.getClient = function getClient() {
   return this.client;
 };
 
+TestCommon.prototype.getOAuth2Client = function getOAuth2Client() {
+  if (this.oauth2client) {
+    return this.oauth2client;
+  }
+
+  this.oauth2client = new OAuth2Client(this.clientId, this.clientSecret);
+  return this.oauth2client;
+};
+
 TestCommon.prototype.getSpreadsheet = function getSpreadsheet() {
   if (this.ss) {
     return this.ss;

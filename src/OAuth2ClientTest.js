@@ -1,8 +1,8 @@
 testRunner.functions.push(function (test, common) {
-  var clientId = common.clientId;
-  var clientSecret = common.clientSecret;
-
   test('new OAuth2Client()', function (assert) {
+    var clientId = common.clientId;
+    var clientSecret = common.clientSecret;
+
     assert.throws(
       function () {
         return new OAuth2Client(1, clientSecret);
@@ -36,6 +36,11 @@ testRunner.functions.push(function (test, common) {
     assert.equal(oauth2.clientId, clientId, 'has a clientId property');
     assert.equal(oauth2.clientSecret, clientSecret, 'has a clientSecret property');
     assert.ok(Obj.isObject(oauth2.service), 'has a service property');
+  });
+
+  test('oauth2client.doGet()', function (assert) {
+    var output = common.getOAuth2Client().doGet();
+    assert.ok(Obj.isGASObject(output, 'HtmlOutput'), 'returns HtmlOutput object');
   });
 });
 

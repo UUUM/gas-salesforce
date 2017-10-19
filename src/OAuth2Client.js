@@ -44,7 +44,9 @@ OAuth2Client.prototype.createService = function createService() {
 };
 
 OAuth2Client.prototype.doGet = function doGet() {
-  return HtmlService.createHtmlOutput('<a href="' + this.getAuthorizationUrl() + '" target="_blank">Authorize</a>');
+  var template = HtmlService.createTemplateFromFile('authorization');
+  template.authorizationUrl = this.getAuthorizationUrl();
+  return template.evaluate();
 };
 
 OAuth2Client.prototype.getAccessToken = function getAccessToken() {

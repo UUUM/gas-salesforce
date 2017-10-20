@@ -43,14 +43,14 @@ OAuth2Client.prototype.createService = function createService() {
   return service;
 };
 
-OAuth2Client.prototype.doGet = function doGet() {
+OAuth2Client.prototype.getAccessToken = function getAccessToken() {
+  return this.service.getAccessToken();
+};
+
+OAuth2Client.prototype.getAuthorizationHtml = function getAuthorizationHtml() {
   var template = HtmlService.createTemplateFromFile('authorization');
   template.authorizationUrl = this.getAuthorizationUrl();
   return template.evaluate();
-};
-
-OAuth2Client.prototype.getAccessToken = function getAccessToken() {
-  return this.service.getAccessToken();
 };
 
 OAuth2Client.prototype.getAuthorizationUrl = function getAuthorizationUrl() {

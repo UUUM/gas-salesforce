@@ -1,5 +1,5 @@
-function doGet(e) {
-  return (new TestCommon()).getOAuth2Client().doGet(e);
+function doGet() {
+  return (new TestCommon()).getOAuth2Client().getAuthorizationHtml();
 }
 
 function authCallback(request) {

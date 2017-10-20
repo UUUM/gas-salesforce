@@ -38,8 +38,8 @@ testRunner.functions.push(function (test, common) {
     assert.ok(Obj.isObject(oauth2.service), 'has a service property');
   });
 
-  test('oauth2client.doGet()', function (assert) {
-    var output = common.getOAuth2Client().doGet();
+  test('oauth2client.getAuthorizationHtml()', function (assert) {
+    var output = common.getOAuth2Client().getAuthorizationHtml();
     assert.ok(Obj.isGASObject(output, 'HtmlOutput'), 'returns HtmlOutput object');
   });
 });

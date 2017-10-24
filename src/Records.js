@@ -22,18 +22,24 @@ Records.prototype.fetchNext = function fetchNext() {
 };
 
 Records.prototype.forEach = function forEach(func) {
-  var record = new Record();
-
   for (;;) {
-    var records = this.records;
-    for (var i = 0; i < records.length; i++) {
-      func(record.setRecord(records[i]));
-    }
+    this.forEachNoFetch(func);
 
     if (!this.fetchNext()) {
       break;
     }
   }
+
+  return this;
+};
+
+Records.prototype.forEachNoFetch = function forEachNoFetch(func) {
+  var record = new Record();
+  var records = this.records;
+  for (var i = 0; i < records.length; i++) {
+    func(record.setRecord(records[i]));
+  }
+  return this;
 };
 
 Records.prototype.setResponse = function setResponse(response) {
